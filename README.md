@@ -4,7 +4,7 @@
 
 ---
 
-![Crypto](Images/Crypto.jpg)
+![Crypto](Images/crypto.jpg)
 
 ---
 
