@@ -1,0 +1,9 @@
+* 	 (HEAD -> main) minor changes to crypto_investments, readme finalized
+* 	 (origin/main, origin/HEAD) conclusion modified
+* 	 renamed one variable in crypto_investments
+* 	 crypto_investments finalized
+* 	 created pca dataframe and etermined the optimal k value for this dataframe
+* 	 crypto_investments updated with optimal k and the set of crypto segments is added and plotted.
+* 	 readme image intro updated
+* 	 readme initialized, also the starter notebook and the Resources added.
+* 	 Initial commit
