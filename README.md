@@ -1,6 +1,6 @@
 # Portoflio Optimizer
 
-### Portfolio Optimizer clusters cryptocurrencies by their performance in different time periods by utilizing the K-Means Algorithm (the K-means algorithm is an unsupervised learning algorithm that identifies clusters and solves business problems). The results are also vizually presented, allowing for further in-depth analysis.
+### Portfolio Optimizer anallyses cryptocurrencies by their performance in different time periods by utilizing the scikit-learn library. The data is first normalized with the help of StandardScaler module. Then, K-Means model is applied to both the normalized data, as well as to the optimized with the Principal Component Analysis dataset, to generate the clusters of cryptocurrencies based on their performance. The results are also vizually presented and compared, allowing for further in-depth analysis.
 
 ---
 
@@ -35,13 +35,9 @@ _Prerequisites_
    - [PyViz ](https://pyviz.org/) - for guidance on how to start visualization, interactive visualization, styles and layouts customazation.
    - [hvPlot ](https://hvplot.holoviz.org/) is a visualization library that is designed to work with Pandas DataFrames and that we can use to create interactive plots for our data.<br/>
 
-3. `SQLAlchemy` is an open-source SQL library for Python. It is designed to ease the communication between Python-based programs and databases"
+3. `Scikit-learn` is a simple and efficient tools for predictive data analysis. It is built on NumPy, SciPy, and matplotlib.
 
-   - [SQLAlchemy ](https://www.sqlalchemy.org/) - for information on the library, its features and installation instructions.<br/>
-
-4. `Voilà` builds interactive web applications directly from our Jupyter notebooks.
-
-   - [Voilà ](https://voila.readthedocs.io/en/stable/) - to read more about deploying, installing and customizing<br/>
+   - [scikit-learn ](https://scikit-learn.org/stable/) - for information on the library, its features and installation instructions.<br/>
 
 ---
 
@@ -71,7 +67,7 @@ To install PyViz, in Terminal run:
 
 ```python
 # conda
-conda install -c pyviz hvplot geoviews
+conda install -c pyviz hvplot
 ```
 
 Confirm the installation of all the PyViz packages by running the following commands in Terminal type:
@@ -80,30 +76,17 @@ Confirm the installation of all the PyViz packages by running the following comm
  conda list hvplot
 ```
 
-To install SQLAlchemy, in Terminal run:
+To install scikit library, in Terminal run:
 
 ```python
 # PuPi
-pip install SQLAlchemy
+pip install -U scikit-learn
 ```
 
-Confirm the installation of the SQLAlchemy package by running the following commands in Terminal type:
+Confirm the installation of the scikit library by running the following commands in Terminal type:
 
 ```python
- conda list sqlalchemy
-```
-
-To install Voilà, in Terminal run:
-
-```python
-# PuPi
-pip install voila
-```
-
-Confirm the installation of the Voilà package by running the following commands in Terminal type:
-
-```python
- conda list voila
+ conda list scikit-learn
 ```
 
 ---
@@ -112,38 +95,40 @@ Confirm the installation of the Voilà package by running the following commands
 
 > Application summary<br/>
 
-ETF Analyzer assists investment advisors and indivifual investors, to interact with databases and perform sophsitcated financial analys.<br/>
-Furthermore, Voilà library transforms ETF Analyzer into an interactive web application that nontechnical users without any coding experience can use.
+Portoflio Optimizer takes us through the necseesary steps to perform data clustering, including data normalization, selecting an optimal k for the K-means algorithm, clustering optimization with Principal Component Analysis <br/>
+The tool consists of two parts: <br/>
+a) Clustering with K-mean by using the original scaled data<br/>
+b) Cluster optimization with Principal Componenet Analysis. <br/>
+The results of (a) and (b) are compared and the conclusion is drawn at the end of the application.<br/>
 
-- The analyzis begings by informing the users about the portfolio of stocks that form the ETF:<br/>
-  ![ETF_table](Images/ETF_table.PNG)<br/>
-- Next, a single stock's daily returns and cumulative returns are displayed and the trends are analyzed:<br/>
-  ![ETF_returns](Images/PYPL_returns.png)<br/>
-  ![ETF_c_returns](Images/PYPL_C_returns.png)<br/>
-- A zoom into top 10 PPYL's returns and the information on when the stock was traded above $200 is also provided:<br/>
-  ![ETF_top](Images/PYPL_highest.PNG)<br/>
-  ![ETF_200](Images/PPYL_200.PNG)<br/>
-- We procede wtih the ETF's cumulative returns analyzis:<br/>
-  ![ETF_returns](Images/ETF_returns.png)<br/>
-- We finalyze with performance comparison between the sinle stock (PYPL) and the ETF:<br/>
-  ![ETF_PPYL](Images/ETF_PPYL.png)<br/>
-- Voilà library is deployed to give web based interactive experience to the tool's users:<br/>
-  ![Voila](Images/voila.PNG)<br/>
+**_Clustering with K-mean by using the original scaled data_**<br/>
 
-  `Play Voilà demo video to review PYPL and ETF analyzes perfromed by the application`<br/>
+- The analyzis begings by loading cryptocurrencies performance over different time periods:<br/>
+  ![crypto_initial](Images/initial_df.png)<br/>
+- Next, we use the `StandardScaler` module from scikit-learn to normalize the CSV file data. The `fit_transform` function from the StandardScaler` module is utilized, resulting in:<br/>
+  ![normalized_data](Images/scaled_segmented_df.PNG)<br/>
+- We use the elbow technique to find the optimal k value for the K-means algorithm:<br/>
+  ![normalized_elbow](Images/elbow_scaled.png)<br/>
+- Once an optimal k-value is chosen, K-Means model is applied to produce clusters:<br/>
+  ![scatter_plot_normalized](Images/scatter_scaled.png)<br/>
 
-<video src=ETF_Analyzer.mp4 controls="controls" style="max-width: 730px;"></video>
+**_Clusters optimization with Principal Component Analysis (PCA)_**<br/>
+
+- A new dataset is created by applying PCA model and chosing three Principal Components:<br/>
+  ![pca_data](Images/PCA_segmented_dfPNG.PNG)<br/>
+- The elbow technique to find the optimal k value for the K-means model is applied:<br/>
+  ![elbow_pca](Images/elbow_pca.png)<br/>
+- And again, once the optimal k-value is chosen, K-Means model is applied to the new PCA dataset to produce clusters:<br/>
+  ![pca_clusters](Images/scatter_pca.png)<br/>
+
+**_Comparision_**<br/>
+
+- We finalyze by comparing the elbow curves and the clusters generated with and without PCA model applied to our dataset and draw the conclusion at the end of the tool.<br/>
 
 > Getting started<br/>
 
-- To use ETF Analyzer first clone the repository to your PC.<br/>
+- To use Portoflio Optimizer first clone the repository to your PC.<br/>
 - Open `Jupyter lab` as per the instructions in the [Installation Guide](#installation-guide) to run the application.<br/>
-
-- Run Voilà in the Terminal: Voilà accepts a path to the notebook and then generates a web app with any visualizations or output that were generated in the Jupyter notebook. The code is simple:
-
-```python
-voila <relative-path-to-notebook>
-```
 
 ---
 
